@@ -2,8 +2,7 @@
 import { useCategoryStore } from '@/stores/category'
 import { storeToRefs } from 'pinia'
 const { categoryList } = storeToRefs(useCategoryStore())
-console.log(categoryList);
-
+console.log(categoryList.value)
 </script>
 
 <template>
@@ -17,7 +16,7 @@ console.log(categoryList);
           <RouterLink to="/">首页</RouterLink>
         </li> 
         <li class="home" v-for="item in categoryList" :key="item.id">
-          <RouterLink to>
+          <RouterLink active-class="active" :to="`/category/${item.id}`" >
             {{ item.name }}
           </RouterLink>
         </li>

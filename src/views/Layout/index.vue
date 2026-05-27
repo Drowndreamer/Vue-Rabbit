@@ -18,14 +18,9 @@ onMounted(() => {
   <LayoutFixed />
   <LayoutHeader />
   <LayoutNav />
-  <RouterView />
-  <div class="container">
-  </div>
+  <RouterView :key="$route.fullPath" /> 
   <LayoutFooter />
 </template>
 
 <style scoped>
-.container {
-  height: 1200px;
-}
 </style>

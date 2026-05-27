@@ -20,7 +20,7 @@ const isShow = (() => y.value > 78)
         </li>
         
         <li v-for="item in categoryList" :key="item.id">
-          <RouterLink to>
+          <RouterLink :to="`/category/${item.id}`">
             {{ item.name }}
           </RouterLink>
         </li>
