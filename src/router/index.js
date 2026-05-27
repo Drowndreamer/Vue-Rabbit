@@ -18,13 +18,18 @@ const router = createRouter({
         {
           path: 'category/sub/:id',
           component: () => import('@/views/SubCategory/index.vue')
+        },
+        {
+          path: '/detail/:id',
+          component: () => import('@/views/Detail/index.vue')
         }
+
       ]
     },
     {
       path: '/login',
       component: () => import('@/views/Login/index.vue')
-    } 
+    } ,
   ],
   //路由滚动行为定制，切换路由滚动条为0
   scrollBehavior() {

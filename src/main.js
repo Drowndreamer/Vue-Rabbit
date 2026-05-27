@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { componentsPlugin } from './components'
 import App from './App.vue'
 import router from './router'
 import { lazyPlugin } from './directives/index'
@@ -17,3 +18,4 @@ app.mount('#app')
 
 //自定义指令 m-lazy
 app.use(lazyPlugin)
+app.use(componentsPlugin)
