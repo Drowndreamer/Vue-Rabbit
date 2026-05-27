@@ -2,7 +2,8 @@
 import { getCategoryFilterAPI } from '@/apis/category'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { getSubCategoryAPI } from '@/apis/category'
+import GoodsItem from '../Home/components/GoodsItem.vue'
 const route = useRoute()
 const id = route.params.id
 const categoryData = ref({})
@@ -11,6 +12,37 @@ onMounted(async () => {
   categoryData.value = res.result
 })
 
+//获取基础商品列表数据
+const goodsList = ref([])
+const reqData = ref({
+  categoryId: id,
+  page: 1,
+  pageSize: 20,
+  sortField: 'publishTime'
+})
+const getGoodsList = async () => {
+  const res = await getSubCategoryAPI(
+    reqData.value
+  )
+  goodsList.value = res.result.items
+}
+onMounted(getGoodsList)
+//获取分页数据
+const tabChange = () => {
+  reqData.value.page = 1
+  getGoodsList()
+}
+const isDisabled = ref(false)
+const load = async () => {
+  reqData.value.page++
+  const res = await getGoodsList(reqData.value)
+  goodsList.value = [...goodsList.value, ...res.result.items]
+  //push方法会改变原数组，导致页面刷新
+  //goodsList.value.push(...res.result.items)
+  if(res.result.items.length === 0) {
+    isDisabled.value = true
+  }
+}
 </script>
 
 <template>
@@ -24,13 +56,14 @@ onMounted(async () => {
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="reqData.sortField" @tab-change="tabChange">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="isDisabled">
          <!-- 商品列表-->
+         <GoodsItem v-for="item in goodsList" :key="item.id" :good="item" />
       </div>
     </div>
   </div>

@@ -26,6 +26,12 @@ const router = createRouter({
       component: () => import('@/views/Login/index.vue')
     } 
   ],
+  //路由滚动行为定制，切换路由滚动条为0
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
 })
 
 export default router
