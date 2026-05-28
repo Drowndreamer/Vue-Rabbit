@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import useMouseInElement from '@vueuse/core'
+import { useMouseInElement } from '@vueuse/core'
 import { watch } from 'vue'
 
 // 图片列表
