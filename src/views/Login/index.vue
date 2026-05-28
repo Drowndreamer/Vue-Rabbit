@@ -1,5 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
 
 const form = ref({
   account: '',
@@ -32,12 +38,19 @@ const rules = {
 const formRef = ref(null)
 
 const doLogin = () => {
-  formRef.value.validate((valid)=>{
+  const {account, password} = form.value
+  formRef.value.validate(async (valid) => {
     //to do 
-    
+    if(valid){
+      await userStore.getUserInfo({account, password})
+      ElMessage.success({
+        type: 'success',
+        message: '登录成功'
+      })
+      $router.replace('/')``
+    }
   })
 }
-  
 </script>
 
 
