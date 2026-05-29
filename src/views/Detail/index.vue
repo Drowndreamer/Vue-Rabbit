@@ -26,8 +26,8 @@ const changeSku = (sku) => {
   console.log(skuObj)
 }
 const count = ref(1)
-const countChange = (count) => {
-  count.value = count
+const countChange = (newCount) => {
+  count.value = newCount
 }
 const addCart = () => {
   if(skuObj.skuId){

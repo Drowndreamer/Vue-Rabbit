@@ -2,11 +2,12 @@
 import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 const { userInfo } = userStore
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 // 退出登录
 const confirm = () => {
   userStore.clearUserInfo()
-  $router.push('/login')
+  router.push('/login')
 }
 </script>
 

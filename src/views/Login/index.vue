@@ -3,15 +3,18 @@ import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const userStore = useUserStore()
 
 
 const form = ref({
-  account: '',
-  password: '',
+  account: 'xiaotuxian001',
+  password: '123456',
   // 同意协议
-  agree: false
+  agree: true
 })
 const rules = {
   account: [
@@ -47,7 +50,7 @@ const doLogin = () => {
         type: 'success',
         message: '登录成功'
       })
-      $router.replace('/')``
+      router.replace('/')
     }
   })
 }
