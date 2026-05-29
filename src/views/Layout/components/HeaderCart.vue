@@ -1,7 +1,9 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
+import { storeToRefs } from 'pinia'
 const cartStore = useCartStore()
-const { cartList, delCart, totalCount, totalPrice } = storeToRefs(cartStore)
+const { cartList, totalCount, totalPrice } = storeToRefs(cartStore)
+const delCart = cartStore.delCart
 </script>
 
 <template>

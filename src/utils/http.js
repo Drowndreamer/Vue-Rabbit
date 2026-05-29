@@ -1,10 +1,10 @@
 //axios 封装
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus' 
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/user'
-const userStore = useUserStore()
-const { userInfo, clearUserInfo } = userStore
+// const userStore = useUserStore()
+// const { userInfo, clearUserInfo } = userStore
 
 // 创建axios实例
 const httpInstance = axios.create({
@@ -14,11 +14,15 @@ const httpInstance = axios.create({
 
 //拦截器
 // 1. 从pinia中获取token
-const token = userInfo.token
 httpInstance.interceptors.request.use(
   config => {
+    //需要时导入userStore
+    
+ console.log('请求拦截器执行了', config.url)
+    const userStore = useUserStore()
+    const { userInfo } = userStore
     if(userInfo.token){
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${userInfo.token}`
     }
     return config
   },
@@ -35,12 +39,16 @@ httpInstance.interceptors.response.use(
   error => {
     ElMessage.error({
       type: 'error',
-      message: error.response.data.message
+      //先判断 error.response 是否存在
+      message: error.response?.data.message || '请求失败'
     })
     //401token失效处理
     //1. 清除本地用户数据
     //2. 跳转到登录页
-    if(error.response.status === 401){
+    //导入clearUserInfo方法
+    const userStore = useUserStore()
+    const { clearUserInfo } = userStore
+    if(error.response?.status === 401){
       clearUserInfo()
       $router.push('/login')
     }

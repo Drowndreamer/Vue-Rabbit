@@ -4,7 +4,7 @@
  import { useRoute } from 'vue-router'
  import { getHomeBannerAPI } from '@/apis/home'
  import GoodsItem from '../Home/components/GoodsItem.vue'
-
+import {onBeforeRouteUpdate} from 'vue-router'
  const route = useRoute()
  const id = route.params.id
  const categoryData = ref({})

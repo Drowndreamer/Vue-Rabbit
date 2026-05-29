@@ -2,8 +2,9 @@ import request from '@/utils/http'
 
   //获取商品详情
   export const getDetail = (id) => {
+    console.log('getDetail被调用, request:', request)
     return request({
-      url: 'goods',
+      url: '/goods',
       method: 'get',
       params: {
         id
