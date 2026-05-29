@@ -1,6 +1,7 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
 import { storeToRefs } from 'pinia'
+
 const cartStore = useCartStore()
 const { cartList } = storeToRefs(cartStore)
 const delCart = cartStore.delCart
@@ -81,7 +82,7 @@ const singleCheck = (skuId, val) => {
           <span class="red">¥ {{ cartStore.selectedPrice.toFixed(2) }}</span>
         </div>
         <div class="total">
-          <el-button size="large" type="primary" >下单结算</el-button>
+          <el-button size="large" type="primary" @click="$router.push('/checkout')">下单结算</el-button>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export const useCartStore = defineStore('cart', () => {
       await insertCartAPI({skuId, count})
       //添加购物车成功后，刷新购物车列表
       const res = await findNewCartListAPI()
-      cartList.value = res.result || []
+      cartList.value = res.result
 
     }else{
       const index = cartList.value.findIndex(item => item.skuId === product.skuId)

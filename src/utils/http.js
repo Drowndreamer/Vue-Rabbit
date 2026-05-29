@@ -5,7 +5,8 @@ import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/user'
 // const userStore = useUserStore()
 // const { userInfo, clearUserInfo } = userStore
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 // 创建axios实例
 const httpInstance = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -50,7 +51,7 @@ httpInstance.interceptors.response.use(
     const { clearUserInfo } = userStore
     if(error.response?.status === 401){
       clearUserInfo()
-      $router.push('/login')
+      router.push('/login')
     }
 
     return Promise.reject(error)
