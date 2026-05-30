@@ -1,4 +1,6 @@
 # vue-rabbit
+小兔鲜电商前端项目，耗时7天，使用Vue3 + ElementPlus + Axios + Pinia + Vite
+
 
 This template should help get you started developing with Vue 3 in Vite.
 
